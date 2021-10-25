@@ -56,13 +56,23 @@ class CharList extends Component {
         }));
     }
 
+    itemRefs = [];
+
+    setRef = (ref) => {
+        this.itemRefs.push(ref);
+    }
+
+    focusOnItem = (id) => {
+        this.itemRefs.forEach((item) => item.classList.remove('char__item_selected'));
+        this.itemRefs[id].classList.add('char__item_selected');
+        this.itemRefs[id].focus();
+    }
+
     marvelService = new MarvelService();
 
     renderList = (arr) => {
         const items = arr.map((item, i) => {
-            let imgStyle = {
-                'objectFit' : 'cover'
-            }
+            let imgStyle = { 'objectFit' : 'cover'}
 
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg'){
                 imgStyle = {'objectFit': 'unset'}
@@ -95,18 +105,6 @@ class CharList extends Component {
                 {items}
             </ul>
         );
-    }
-
-    itemRefs = [];
-
-    setRef = (ref) => {
-        this.itemRefs.push(ref);
-    }
-
-    focusOnItem = (id) => {
-        this.itemRefs.forEach((item) => item.classList.remove('char__item_selected'));
-        this.itemRefs[id].classList.add('char__item_selected');
-        this.itemRefs[id].focus();
     }
 
     render(){
